@@ -1,5 +1,7 @@
 cabecalho = " NERY BANK "
+cabecalho_formatado = print(cabecalho.center(60, "="))
 rodape = " DEVELOPED BY BABADUQUE "
+rodape_formatado = print(rodape.center(60, "="))
 menu = """
 BEM-VINDO! SELECIONE A SUA OPERAÇÃO ABAIXO:
 
@@ -8,8 +10,7 @@ BEM-VINDO! SELECIONE A SUA OPERAÇÃO ABAIXO:
 [e] Extrato
 [q] Sair
 
-
-"""
+=> """
 
 saldo = 0
 limite_de_saque = 500
@@ -18,9 +19,9 @@ numero_saques = 0
 LIMITE_SAQUES = 3
 
 while True:
-    print(cabecalho.center(60, "="))
+    cabecalho_formatado
     opcao = input(menu)
-    print(rodape.center(60, "="))
+    rodape_formatado
 
     if opcao == "d" or opcao == "D":
         print("SELECIONADO: Depósito")
@@ -30,9 +31,9 @@ while True:
         saldo += deposito_parcial
         extrato.append(f"DEPOSITO: R$ {deposito_parcial:.2f}")
             
-        print("\n\nVALOR DEPOSITADO COM SUCESSO!")
+        print("\n\nOPERAÇÃO REALIZADA! VALOR DEPOSITADO.")
         print(f"NOVO SALDO: R$ {saldo:.2f}")
-        print(rodape.center(60, "="))
+        rodape_formatado
 
         finalizar_programa = input("""[key] MENU PRINCIPAL\n[n] SAIR\n\n""")
         if finalizar_programa == "n" or finalizar_programa == "N":
@@ -49,14 +50,14 @@ while True:
                 saldo -= saque_parcial
                 extrato.append(f"SAQUE: R$ {saque_parcial:.2f}")
 
-                print("\n\nVALOR LIBERADO! RETIRE O SEU DINHEIRO NA BOCA DO CAIXA.")
+                print("\n\nOPERAÇÃO REALIZADA! RETIRE O SEU DINHEIRO NA BOCA DO CAIXA.")
                 print(f"\nNOVO SALDO: R$ {saldo:.2f}")
-                print(rodape.center(60, "="))
+                rodape_formatado
             else:
-                print("\n\nOPERAÇÃO INVÁLIDA! VOCÊ ULTRAPASSOU O LIMITE DE R$ 500 DE SAQUE OU O VALOR DO SAQUE É MAIOR QUE O SEU SALDO.\n")
+                print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR ULTRAPASSA O LIMITE DE R$ 500,00 POR SAQUE OU O VALOR DO SAQUE É MAIOR QUE O SEU SALDO.\n")
                 
         else:
-            print("OPERAÇÃO INVÁLIDA! LIMITE DE SAQUE ATINGIDO.")
+            print("OPERAÇÃO NÃO REALIZADA! VOCÊ JÁ UTILIZOU OS 3 SAQUES DISPONÍVEIS PARA O DIA. TENTE NOVAMENTE AMANHÃ...")
 
         finalizar_programa = input("""[key] MENU PRINCIPAL\n[n] SAIR\n\n""")
         if finalizar_programa == "n" or finalizar_programa == "N":
@@ -68,7 +69,7 @@ while True:
             print(f"{i + 1}. {operacao}")
 
         print(f"\nSALDO ATUAL: R$ {saldo:.2f}")
-        print(rodape.center(60, "="))
+        rodape_formatado
         
         finalizar_programa = input("""[key] MENU PRINCIPAL\n[n] SAIR\n\n""")
         if finalizar_programa == "n" or finalizar_programa == "N":
@@ -76,7 +77,7 @@ while True:
     elif opcao == "q" or opcao == "Q":
         break
     else:
-        print("OPÇÃO INVÁLIDA! TENTE NOVAMENTE...\n\n")
+        print("OPÇÃO INVÁLIDA! POR FAVOR SELECIONE NOVAMENTE A OPÇÃO DESEJADA.\n\n")
         
         finalizar_programa = input("""[key] MENU PRINCIPAL\n[n] SAIR\n\n""")
         if finalizar_programa == "n" or finalizar_programa == "N":
