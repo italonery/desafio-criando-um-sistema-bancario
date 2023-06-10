@@ -38,7 +38,7 @@ def depositar(saldo, deposito_parcial, extrato, /):
         print(f"NOVO SALDO: R$ {saldo:.2f}\n")
         exibir_rodape()
     else:
-        print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR INFORMADO PARA DEPÓSITO É INVÁLIDO.")
+        print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR INFORMADO PARA DEPÓSITO É INVÁLIDO.\n")
     return saldo, extrato
 
 def sacar(*, saldo, saque_parcial, extrato, limite_por_saque, numero_saques, limite_saque_diario):
@@ -47,11 +47,14 @@ def sacar(*, saldo, saque_parcial, extrato, limite_por_saque, numero_saques, lim
     excedeu_limite_saque_diario = numero_saques >= limite_saque_diario
 
     if excedeu_saldo:
-        print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR DO SAQUE É MAIOR QUE O SEU SALDO.")
+        print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR DO SAQUE É MAIOR QUE O SEU SALDO.\n")
+        exibir_rodape()
     elif excedeu_limite_por_saque:
-        print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR ULTRAPASSA O LIMITE DE R$ 500,00 POR SAQUE.")
+        print("\n\nOPERAÇÃO NÃO REALIZADA! O VALOR ULTRAPASSA O LIMITE DE R$ 500,00 POR SAQUE.\n")
+        exibir_rodape()
     elif excedeu_limite_saque_diario:
-        print("\n\nOPERACAO NÃO REALIZADA! VOCÊ JÁ UTILIZOU OS 3 SAQUES DISPONÍVEIS PARA O DIA. TENTE NOVAMENTE AMANHÃ...")
+        print("\n\nOPERACAO NÃO REALIZADA! VOCÊ JÁ UTILIZOU OS 3 SAQUES DISPONÍVEIS PARA O DIA. TENTE NOVAMENTE AMANHÃ...\n")
+        exibir_rodape()
     elif saque_parcial > 0:
         saldo -= saque_parcial
         extrato.append(f"SAQUE: R$ {saque_parcial:.2f}")
@@ -88,6 +91,7 @@ def criar_usuario(usuarios):
     nome = input("INFORME O NOME COMPLETO: ")
     data_nascimento = input("INFORME A DATA DE NASCIMENTO (DD/MM/AAAA): ")
     endereco = input("INFORME O ENDEREÇO (LOGRADOURO, NRO - BAIRRO - CIDADE/ESTADO): ")
+    print("\n\nOPERAÇÃO REALIZADA! USUÁRIO CRIADO.\n")
     exibir_rodape()
 
     usuarios.append({"nome": nome, "data_nascimento": data_nascimento, "cpf": cpf, "endereco": endereco})
@@ -101,10 +105,11 @@ def criar_conta(agencia, numero_conta, usuarios):
     usuario = filtrar_usuario(cpf, usuarios)
 
     if usuario:
-        print("OPERAÇÃO REALIZADA! CONTA CRIADA.")
+        print("\n\nOPERAÇÃO REALIZADA! CONTA CRIADA.\n")
+        exibir_rodape()
         return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
     else:
-        print("\n\nOPERAÇÃO NÃO REALIZADA! NÃO HÁ USUÁRIO VINCULADO AO CPF INFORMADO. CRIE UM USUÁRIO PARA ESSE CPF E TENTE NOVAMENTE...")
+        print("\n\nOPERAÇÃO NÃO REALIZADA! NÃO HÁ USUÁRIO VINCULADO AO CPF INFORMADO. CRIE UM USUÁRIO PARA ESSE CPF E TENTE NOVAMENTE...\n")
         exibir_rodape()
 
 def listar_contas(contas):
@@ -116,6 +121,7 @@ def listar_contas(contas):
         """
 
         print(linha)
+    exibir_rodape()
 
 def main():
     LIMITE_SAQUE_DIARIO = 3
@@ -137,7 +143,7 @@ def main():
             print("SELECIONADO: Depósito")
             print(f"SALDO ATUAL: R$ {saldo:.2f}")
 
-            deposito_parcial = float(input("\nInforme o valor a ser depositado em conta: "))
+            deposito_parcial = float(input("\nInforme o valor a ser depositado em conta: R$ "))
             saldo, extrato = depositar(saldo, deposito_parcial, extrato)
             finalizar = finalizar_programa()
             if finalizar.lower() == "n":
@@ -149,7 +155,7 @@ def main():
             print("SELECIONADO: Saque")
             print(f"SALDO ATUAL: R$ {saldo:.2f}")
 
-            saque_parcial = float(input("\nInforme o valor a ser retirado da conta: "))
+            saque_parcial = float(input("\nInforme o valor a ser retirado da conta: R$ "))
             saldo, extrato, numero_saques = sacar(
                 saldo=saldo,
                 saque_parcial=saque_parcial,
